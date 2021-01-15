@@ -1,0 +1,124 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dogechat Sign In</title>   
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<link rel="shortcut icon" type="image/png" href="./assets/icon.png">
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign In</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<div class="g-signin2" data-onsuccess="onSignIn"></div>
+				</div>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" id="Username" class="form-control" placeholder="username">
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" id = "password"class="form-control" placeholder="password">
+					</div>
+					<div class="row align-items-center remember">
+						<input type="checkbox">Remember Me
+					</div>
+					<div class="form-group">
+						<a id="submit" class="btn float-right login_btn">Submit</a>
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Don't have an account?<a href="http://localhost:8000/signup">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Forgot your password?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	
+	function filter(text){
+		var text_length = text.length-2;
+		var converted_text = text.substr(1,text_length);
+		return converted_text 
+	}	
+	$("#submit").click(function(){
+		$.ajax({
+			type : "GET",
+			datatype : "jsonp",
+			url : "http://localhost:3000/user",
+			success: function(data){
+			// console.log(data.Message.)
+				var username =$('#Username').val();
+				var pass = $("#password").val()
+				console.log(data)
+				var data_length = data.Message.length;
+				var users = [];
+				var password = [];
+				var id = [];
+				for(var i = 0; i < data_length; i++){
+					var myJSON = JSON.stringify(data.Message[i].name)
+					var myID = JSON.stringify(data.Message[i]._id)
+					var myPass = JSON.stringify(data.Message[i].password)
+					password.push(filter(myPass))
+					users.push(filter(myJSON))
+					id.push(filter(myID))
+				}
+				var usersLength = users.length;
+				var contador = 0;
+				for(var i = 0;i < data_length; i++){
+				if(users[i] == username){
+					var number = i
+					if(password[number] == pass){
+						console.log('Succesfull')
+						$('#submit').prop("href", `http://localhost:8000/chat-list?chat=${id[number]}&user=${users[number]}`)//http://localhost:8000/chat?chat=${id[number]}&user=${users[number]}
+					}
+					else{
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Incorrect password!',
+							footer: '<a href>Forgot your password?</a>'
+						})
+					}
+				}
+				else{
+					contador++;
+					if(usersLength == contador){
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Incorrect password!',
+							footer: '<a href>Forgot your password?</a>'
+						})
+					}
+				}
+				}
+			}
+		})
+	}); 
+</script>
+</body>
+</html>

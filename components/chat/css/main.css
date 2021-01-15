@@ -1,0 +1,161 @@
+#messages{
+    list-style: none;
+}
+.messages{
+    height: 65%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.messages li{
+    text-align: left;
+    font-size:1em;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+.messages li div{
+    margin-left: 50%;
+}
+#message-user{
+    margin-bottom: 0px;
+    font-size: 0.6em;
+    text-align: center;
+    transition: opacity 0.5s ease-in-out;
+}
+#message-date{
+    font-size: 0.5em;
+    margin-left: 50%;
+}
+.messages li button{
+    display: none;
+    background-color: white;
+    border: none;
+    outline: none;
+}
+#iconDelete{
+    width: 50px;
+    height: 50px;
+    display: initial;
+}
+#chat-list-item{
+    list-style: none;
+    color: white;
+    text-decoration: dashed;
+}
+.chat-settings{
+    outline: none !important;
+    list-style: none;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 25px;
+    margin-left: 10%;
+    color: rgb(39, 111, 192);
+    text-decoration: dashed;
+}
+#chat-list{
+    margin-top: 5%;
+}
+#navbar-id{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    position: fixed;
+    margin-left: 72%;
+}
+#navbar-id img{
+    justify-self: center;
+    align-self: center;
+    width: 80%;
+    height: auto;
+}
+#navbar-id h1{
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}
+/* The sidebar menu */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  }
+  
+  /* The sidebar links */
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* The button used to open the sidebar */
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    align-self: center;
+  }
+  emoji-picker{
+    display: none;
+    position: absolute;
+    width: 400px;
+    margin-left:20% ;
+    margin-bottom: 2%;
+    z-index: 1;
+    --background: Black;
+    --input-font-color:white
+  }
+  emoji-picker section.picker{
+    color: white;
+  }
+  .active{
+    display: initial;
+    color: lawngreen;
+  }
+  .openbtn:hover {
+    background-color: #444;
+    outline: none;
+  }
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+  }
+  .openbtn{
+    width: 100px;
+    font-size: 3em;
+  }
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
